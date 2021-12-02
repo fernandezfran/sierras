@@ -137,7 +137,7 @@ class Arrhenius:
 
         Parameters
         ----------
-        ax : matplotlib.pyplot.Axes, default=None
+        ax : matplotlib.pyplot.Axis, default=None
             the current axes.
 
         errorbar_kws : dict, default=None
@@ -150,7 +150,7 @@ class Arrhenius:
 
         Returns
         -------
-        matplotlib.pyplot.Axes
+        matplotlib.pyplot.Axis
             The current axes.
         """
         ax = plt.gca() if ax is None else ax
