@@ -1,1 +1,13 @@
+__pycache___/
+*/__pycache___/
+
+docs/build/
+.ipynb_checkpoints/
+
 .tox/
+restult_images/
+.coverage/
+
+build/
+dist/
+sierras.egg-info/
