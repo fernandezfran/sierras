@@ -1,5 +1,10 @@
 # sierras
 
+[![PyPI](https://img.shields.io/pypi/v/sierras)](https://pypi.org/project/sierras/)
+[![Github Actions CI](https://github.com/fernandezfran/sierras/actions/workflows/sierras_ci.yml/badge.svg)](https://github.com/fernandezfran/sierras/actions/workflows/sierras_ci.yml)
+[![Documentation Status](https://readthedocs.org/projects/sierras/badge/?version=latest)](https://sierras.readthedocs.io/en/latest/?badge=latest)
+[![https://github.com/leliel12/diseno_sci_sfw](https://img.shields.io/badge/DiSoftCompCi-FAMAF-ffda00)](https://github.com/leliel12/diseno_sci_sfw)
+
 **sierras** is a python module that allows to perform arrhenius type plots for
 trace diffusion coefficients and extrapolate to desired temperatures.
 
@@ -45,7 +50,7 @@ pip install -e .
 
 ## Usage
 
-To start using saws you can read the tutorial and the API.
+To start using sierras you can read the tutorial and the API.
 
 
 ## License

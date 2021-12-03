@@ -47,7 +47,7 @@ with open("README.md") as fp:
 setup(
     name="sierras",
     version=VERSION,
-    description="",
+    description="Perform arrhenius type plots for diffusion coefficients",
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
     author="Francisco Fernandez",
