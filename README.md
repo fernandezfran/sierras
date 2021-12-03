@@ -5,7 +5,7 @@ trace diffusion coefficients and extrapolate to desired temperatures.
 
 
 ## Motivation
--------------
+
 Obtaining room temperature trace diffusion coefficients from computational 
 simulations exceeds the reasonable computational time that a simulation may 
 require. Therefore, it is necessary to measure at different high temperatures, 
@@ -14,13 +14,11 @@ type and extrapolate to room temperature.
 
 
 ## Requirements
----------------
 
 You need Python 3.9+ to run sierras.
 
 
 ## Installation
----------------
 
 ### Stable release
 
@@ -45,8 +43,16 @@ and inside your local directory install it in the following way
 pip install -e .
 ```
 
+## Usage
+
+To start using saws you can read the tutorial and the API.
+
 
 ## License
-----------
 
 [MIT License](https://github.com/fernandezfran/sierras/blob/master/LICENSE)
+
+
+### Contact info
+
+<fernandezfrancisco2195@gmail.com>
