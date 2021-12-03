@@ -1,29 +1,52 @@
-# Sierras
+# sierras
 
-por ahora **sierras**, sierra es un anágrama de arrhenius, le tengo que agregar
-una _s_ al final porque ya existe ese paquete en pypi, para que las particulas
-difundan tienen que saltar barreras que se parecen a valles/sierras.
+**sierras** is a python module that allows to perform arrhenius type plots for
+trace diffusion coefficients and extrapolate to desired temperatures.
 
-Sierras tiene dos funcionalidades principales:
-1. Obtener coeficiente de difusión de traza a partir del desplazamiento
-   cuadrático medio.
-2. A partir de datos (temperatura, coeficiente de difusión, **errores opcionales**)
-   hace un ajuste tipo arrhenius, plotea y extrapola a la temperatura deseada
-   (por default la ambiente).
 
-Notas: Ver en PyPI (y su documentación)
----------------------------------------
-1. Ver `chempy`: es más para enseñar química, mostrar fórmulas, etc.
-2. Ver `svante`: hace más o menos esto pero está roto y no me gusta como está implementado
-    (no tiene la api en la documentación, ni tutorial). Además, no extrapola 
-    coeficiente de difusión que sería la forma de orientarlo acá.
-3. Ver `MDAnalysis`: brinda funcionalidades para calcular el desplazamiento cuadrático
-    medio de Einstein y nombra en la documentación cómo se haría para extrapolar (los
-    cuidados que hay que tener), pero pareciera decir que no piensa implementarlo 
-    en su código.
+## Motivation
+-------------
+Obtaining room temperature trace diffusion coefficients from computational 
+simulations exceeds the reasonable computational time that a simulation may 
+require. Therefore, it is necessary to measure at different high temperatures, 
+where diffusive processes are favored, to fit through an Arrhenius equation 
+type and extrapolate to room temperature.
 
-Una vez visto esto:
-- Aprender a usar bien MDAnalysis y usarlo como ejemplo para calcular el desplazamiento
-    cuadrático medio en los tutoriales.
-- Para los tests usar directamente datos (t, msd).
-- Además de el código escrito, considerar distintas variantes de cambio de unidades.
+
+## Requirements
+---------------
+
+You need Python 3.9+ to run sierras.
+
+
+## Installation
+---------------
+
+### Stable release
+
+To install the most recent stable release of sierras with [pip](https://pip.pypa.io/en/stable/), 
+run the following command in your termninal:
+
+```bash
+pip install sierras
+```
+
+### From sources
+
+To installing it from sources you can clone this [GitHub repo](https://github.com/fernandezfran/sierras) 
+
+```bash
+git clone https://github.com/fernandezfran/sierras.git
+```
+
+and inside your local directory install it in the following way 
+
+```bash
+pip install -e .
+```
+
+
+## License
+----------
+
+[MIT License](https://github.com/fernandezfran/sierras/blob/master/LICENSE)
