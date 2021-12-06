@@ -23,7 +23,13 @@ import sierras.diffusion
 
 @pytest.mark.parametrize(
     ("start", "stop", "reference"),
-    [(0, None, (0.64941016, (3.896461, 0.564003)))],
+    [
+        (0, None, (0.64941016, (3.896461, 0.564003))),
+        (50, 150, (0.62004729, (3.7202837, 1.6425037))),
+        (0, 150, (0.65676272, (3.9405763, 0.4432726))),
+        (50, None, (0.63124760, (3.7874856, 1.333454))),
+        (0, 50, (0.70261868, (4.215712, -0.1003175))),
+    ],
 )
 def test_get_diffusion_coefficient(start, stop, reference):
     """Test the linear regression to get the trace diffusion coefficient.
