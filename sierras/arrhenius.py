@@ -35,8 +35,8 @@ R_eV = 8.3145 * 1.03636e-5
 # ============================================================================
 
 
-class Arrhenius:
-    """Arrhenius class.
+class ArrheniusDiffusion:
+    """Arrhenius Diffusion class.
 
     Parameters
     ----------

@@ -73,8 +73,6 @@ def get_diffusion_coefficient(
         time, msd, sample_weight
     )
 
-    slope = reg.coef_[0]
-    intercept = reg.intercept_
-    dcoef = slope / (2 * ndim)
+    dcoef = reg.coef_[0] / (2 * ndim)
 
-    return dcoef, (slope, intercept)
+    return dcoef, (reg.coef_[0], reg.intercept_)
