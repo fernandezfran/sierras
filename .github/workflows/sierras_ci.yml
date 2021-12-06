@@ -2,7 +2,7 @@
 # CI with GitHub Actions
 # ==============================================================
 
-name: sierras
+name: sierras CI
 
 on:
   - push

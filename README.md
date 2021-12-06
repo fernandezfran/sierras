@@ -1,8 +1,8 @@
 # sierras
 
-[![PyPI](https://img.shields.io/pypi/v/sierras)](https://pypi.org/project/sierras/)
 [![Github Actions CI](https://github.com/fernandezfran/sierras/actions/workflows/sierras_ci.yml/badge.svg)](https://github.com/fernandezfran/sierras/actions/workflows/sierras_ci.yml)
 [![Documentation Status](https://readthedocs.org/projects/sierras/badge/?version=latest)](https://sierras.readthedocs.io/en/latest/?badge=latest)
+[![PyPI](https://img.shields.io/pypi/v/sierras)](https://pypi.org/project/sierras/)
 [![https://github.com/leliel12/diseno_sci_sfw](https://img.shields.io/badge/DiSoftCompCi-FAMAF-ffda00)](https://github.com/leliel12/diseno_sci_sfw)
 
 **sierras** is a python module that allows to perform arrhenius type plots for

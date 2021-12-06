@@ -1,7 +1,20 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# This file is part of sierras (https://github.com/fernandezfran/sierras/).
+# Copyright (c) 2021, Francisco Fernandez
+# License: MIT
+#   Full Text: https://github.com/fernandezfran/sierras/blob/master/LICENSE
+
+# ============================================================================
+# DOCS
+# ============================================================================
+
 """Arrhenius fit, plot and extrapolation."""
+
+# ============================================================================
+# IMPORTS
+# ============================================================================
 
 import matplotlib.pyplot as plt
 
@@ -10,6 +23,16 @@ import numpy as np
 import pandas as pd
 
 import sklearn.linear_model
+
+# ============================================================================
+# CONSTANTS
+# ============================================================================
+
+R_eV = 8.3145 * 1.03636e-5
+
+# ============================================================================
+# CLASSES
+# ============================================================================
 
 
 class Arrhenius:
@@ -120,6 +143,17 @@ class Arrhenius:
         )
 
         return self.dcoeff_, self.dcoefferr_
+
+    def activation_energy(self):
+        """Get the activation energy from the fit slope.
+
+        Returns
+        -------
+        float
+            the activation energy.
+        """
+        # acá ver distintas unidades
+        return self.slope_ * R_eV
 
     def predict(self, temperatures):
         """Predict using the linear model.

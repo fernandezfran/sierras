@@ -1,12 +1,12 @@
-__pycache___/
-*/__pycache___/
+__pycache__/
+*/__pycache__/
 
 docs/build/
 .ipynb_checkpoints/
 
 .tox/
 restult_images/
-.coverage/
+.coverage
 
 build/
 dist/

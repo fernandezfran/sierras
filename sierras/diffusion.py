@@ -1,11 +1,28 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# This file is part of sierras (https://github.com/fernandezfran/sierras/).
+# Copyright (c) 2021, Francisco Fernandez
+# License: MIT
+#   Full Text: https://github.com/fernandezfran/sierras/blob/master/LICENSE
+
+# ============================================================================
+# DOCS
+# ============================================================================
+
 """Function to fit the mean square displacement."""
+
+# ============================================================================
+# IMPORTS
+# ============================================================================
 
 import numpy as np
 
 import sklearn.linear_model
+
+# ============================================================================
+# FUNCTIONS
+# ============================================================================
 
 
 def get_diffusion_coefficient(
