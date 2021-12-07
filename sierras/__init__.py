@@ -10,7 +10,7 @@
 # DOCS
 # ============================================================================
 
-"""A module to perform arrhenius type plots for diffusion coefficients."""
+"""A module to perform arrhenius plots for diffusion coefficients."""
 
 # ============================================================================
 # CONSTANTS
@@ -19,5 +19,3 @@
 __author__ = "Francisco Fernandez"
 __email__ = "fernandezfrancisco2195@gmail.com"
 __version__ = "0.0.1"
-
-# use `pinta` as unit conversor

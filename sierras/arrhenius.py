@@ -41,14 +41,10 @@ class ArrheniusDiffusion:
     Parameters
     ----------
     temperatures, diffusion coefficient : array-like
-        (temperatures, diffusion coefficient) data.
+        temperatures and corresponding diffusion coefficients data.
 
-    temperr, differr : array-like
+    temperr, differr : array-like, optional
         the error of each data point.
-
-    Notes
-    -----
-        Assume temperatures are in Kelvin and diffusion coefficients in cm^2/s.
     """
 
     def __init__(
@@ -150,9 +146,8 @@ class ArrheniusDiffusion:
         Returns
         -------
         float
-            the activation energy.
+            the activation energy of the diffusive process.
         """
-        # acá ver distintas unidades
         return self.slope_ * R_eV
 
     def predict(self, temperatures):

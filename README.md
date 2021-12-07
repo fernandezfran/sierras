@@ -5,8 +5,8 @@
 [![PyPI](https://img.shields.io/pypi/v/sierras)](https://pypi.org/project/sierras/)
 [![https://github.com/leliel12/diseno_sci_sfw](https://img.shields.io/badge/DiSoftCompCi-FAMAF-ffda00)](https://github.com/leliel12/diseno_sci_sfw)
 
-**sierras** is a python module that allows to perform arrhenius type plots for
-trace diffusion coefficients and extrapolate to desired temperatures.
+**sierras** is a python module that allows to perform arrhenius plots for
+diffusion coefficients and extrapolate to desired temperatures.
 
 
 ## Motivation
