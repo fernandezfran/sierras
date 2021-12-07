@@ -3,5 +3,6 @@ include README.md
 
 exclude tox.ini
 exclude pyproject.toml
+exclude .readthedocs.yml
 recursive-exclude tests *
 recursive-exclude docs *
