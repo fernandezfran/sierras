@@ -19,3 +19,11 @@
 __author__ = "Francisco Fernandez"
 __email__ = "fernandezfrancisco2195@gmail.com"
 __version__ = "0.0.1"
+
+
+# ============================================================================
+# IMPORTS
+# ============================================================================
+
+from . import arrhenius  # noqa
+from . import diffusion  # noqa
