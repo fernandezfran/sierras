@@ -16,9 +16,9 @@ import sys
 
 # this path is pointing to project/docs/source
 CURRENT_PATH = pathlib.Path(os.path.abspath(os.path.dirname(__file__)))
-EXMA_PATH = CURRENT_PATH.parent.parent
+SIERRAS_PATH = CURRENT_PATH.parent.parent
 
-sys.path.insert(0, str(EXMA_PATH))
+sys.path.insert(0, str(SIERRAS_PATH))
 
 
 import sierras
