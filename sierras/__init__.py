@@ -25,5 +25,5 @@ __version__ = "0.0.1"
 # IMPORTS
 # ============================================================================
 
-from . import arrhenius  # noqa
-from . import diffusion  # noqa
+from .arrhenius import ArrheniusDiffusion  # noqa
+from .diffusion import get_diffusion_coefficient  # noqa
