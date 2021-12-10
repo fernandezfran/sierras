@@ -148,7 +148,7 @@ class ArrheniusDiffusion:
         float
             the activation energy of the diffusive process.
         """
-        return self.slope_ * R_eV
+        return -self.slope_ * R_eV
 
     def predict(self, temperatures):
         """Predict using the linear model.
@@ -208,15 +208,26 @@ class ArrheniusDiffusion:
     def to_csv(self, **kwargs):
         """Write the results to a comma-separated values (csv) file.
 
-        Parameters
-        ----------
-        **kwargs
+        kwargs
             additional keyword arguments that are passed and are documented in
-            `pandas.DataFrame.to_csv`.
+            `pandas.DataFrame.to_csv`. Default values are
+            `path_or_buf="arrhenius.csv"` and `ignore=False`.
         """
-        pd.DataFrame(
-            {
-                "temperatures-inv": self.tempinv_,
-                "extrapolated-diffusion-log": self.predict(self.tempinv_),
-            }
-        ).to_csv(**kwargs)
+        kwargs = {} if kwargs is None else kwargs
+
+        kwargs.setdefault("path_or_buf", "arrhenius.csv")
+        kwargs.setdefault("index", False)
+
+        dict_ = {
+            "temperatures-inv": self.tempinv_,
+            "values-diffusion-log": self.diff_,
+            "extrapolated-diffusion-log": self.predict(self.tempinv_),
+        }
+
+        if self.diff_err_ is not None:
+            dict_["values-err-diffusion-log"] = self.diff_err_
+
+        if self.tempinv_err_ is not None:
+            dict_["temperatures-inv-err"] = self.tempinv_err_
+
+        pd.DataFrame(dict_).to_csv(**kwargs)
