@@ -27,7 +27,7 @@ from setuptools import find_packages, setup
 
 PATH = pathlib.Path(os.path.abspath(os.path.dirname(__file__)))
 
-REQUIREMENTS = ["matplotlib", "numpy", "pandas", "scikit-learn"]
+REQUIREMENTS = ["matplotlib", "numpy", "pandas", "pint", "scikit-learn"]
 
 with open(PATH / "sierras" / "__init__.py") as fp:
     for line in fp.readlines():

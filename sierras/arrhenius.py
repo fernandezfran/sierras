@@ -22,13 +22,18 @@ import numpy as np
 
 import pandas as pd
 
+import pint
+
 import sklearn.linear_model
 
 # ============================================================================
 # CONSTANTS
 # ============================================================================
 
-R_eV = 8.3145 * 1.03636e-5
+ureg = pint.UnitRegistry()
+Q_ = ureg.Quantity
+
+pint.set_application_registry(ureg)  # i am not sure of this
 
 # ============================================================================
 # CLASSES
@@ -45,32 +50,71 @@ class ArrheniusDiffusion:
 
     temperr, differr : array-like, optional
         the error of each data point.
+
+    sysunits : dict, optional.
+        the system of units, default value is:
+        {"temperature": "kelvin", "distance": "centimeters", "time", "seconds"}
     """
 
     def __init__(
-        self, temperatures, diffusion_coefficients, differr=None, temperr=None
+        self,
+        temperatures,
+        diffusion_coefficients,
+        differr=None,
+        temperr=None,
+        sysunits=None,
     ):
-        self.temperatures = np.asarray(temperatures, dtype=np.float32)
-        self.diffusion_coefficients = np.array(
-            diffusion_coefficients, dtype=np.float32
+        # first of all, I define the units
+        self.sysunits = {} if sysunits is None else sysunits
+        for key, value in zip(
+            ("temperature", "distance", "time"),
+            ("kelvin", "centimeter", "second"),
+        ):
+            self.sysunits.setdefault(key, value)
+
+        # force the temperatures to be in kelvin
+        self.temperatures = (
+            Q_(
+                np.asarray(temperatures, dtype=np.float32),
+                ureg(self.sysunits["temperature"]),
+            )
+        ).to("kelvin")
+        self.temperr = (
+            (
+                Q_(
+                    np.asarray(temperr, dtype=np.float32),
+                    ureg(self.sysunits["temperature"]),
+                )
+            ).to("kelvin")
+            if temperr is not None
+            else None
         )
-        self.differr = differr
-        self.temperr = temperr
+
+        self.diffusion_coefficients = (
+            np.array(diffusion_coefficients, dtype=np.float32)
+            * ureg(self.sysunits["distance"]) ** 2
+            / ureg(self.sysunits["time"])
+        )
+        self.differr = (
+            np.asarray(differr, dtype=np.float32)
+            * ureg(self.sysunits["distance"]) ** 2
+            / ureg(self.sysunits["time"])
+            if differr is not None
+            else None
+        )
 
         # change to the variables ln(D) y 1/T
-        self.tempinv_ = 1 / self.temperatures
-        self.diff_ = np.log(self.diffusion_coefficients)
+        self.tempinv_ = 1 / self.temperatures.magnitude
+        self.diff_ = np.log(self.diffusion_coefficients.magnitude)
 
         # error propagation by partial derivatives:
         self.tempinv_err_ = (
-            np.asarray(self.temperr, dtype=np.float32)
-            / (self.temperatures ** 2)
+            self.temperr.magnitude / (self.temperatures.magnitude ** 2)
             if self.temperr is not None
             else None
         )
         self.diff_err_ = (
-            np.asarray(self.differr, dtype=np.float32)
-            / self.diffusion_coefficients
+            self.differr.magnitude / self.diffusion_coefficients.magnitude
             if self.differr is not None
             else None
         )
@@ -88,7 +132,7 @@ class ArrheniusDiffusion:
         )
 
         return self.dcoeff_ * np.sqrt(
-            (errslope / dtemp) ** 2 + errintercept ** 2
+            (errslope / dtemp.to("kelvin").magnitude) ** 2 + errintercept ** 2
         )
 
     def fit(self, **kwargs):
@@ -111,8 +155,10 @@ class ArrheniusDiffusion:
             sample_weight=self.diff_err_,
         )
 
-        self.slope_ = reg.coef_[0]
-        self.intercept_ = reg.intercept_
+        self.slope_ = Q_(reg.coef_[0], ureg(self.sysunits["temperature"])).to(
+            "kelvin"
+        )
+        self.intercept_ = reg.intercept_ * ureg("dimensionless")
 
         return self.slope_, self.intercept_
 
@@ -131,11 +177,26 @@ class ArrheniusDiffusion:
             temperature as a first element and the respective error in the
             second, if this was not possible to calculate, then is None.
         """
-        self.dcoeff_ = np.exp(self.slope_ / dtemp + self.intercept_)
+        dtemp = Q_(dtemp, ureg(self.sysunits["temperature"]))
+        self.dcoeff_ = np.exp(
+            self.slope_.magnitude / dtemp.to("kelvin").magnitude
+            + self.intercept_.magnitude
+        )
         self.dcoefferr_ = (
             self._error_propagation(dtemp)
             if self.diff_err_ is not None
             else None
+        )
+
+        self.dcoeff_ = (
+            self.dcoeff_
+            * ureg(self.sysunits["distance"]) ** 2
+            / ureg(self.sysunits["time"])
+        )
+        self.dcoefferr_ = (
+            self.dcoefferr_
+            * ureg(self.sysunits["distance"]) ** 2
+            / ureg(self.sysunits["time"])
         )
 
         return self.dcoeff_, self.dcoefferr_
@@ -148,7 +209,8 @@ class ArrheniusDiffusion:
         float
             the activation energy of the diffusive process.
         """
-        return -self.slope_ * R_eV
+        r_ideal_gas = Q_("boltzmann_constant").to("eV / kelvin") * Q_("mole")
+        return -self.slope_ * r_ideal_gas
 
     def predict(self, temperatures):
         """Predict using the linear model.
@@ -159,7 +221,7 @@ class ArrheniusDiffusion:
             the temperatures at which you want to predict the diffusion
             coefficient.
         """
-        return self.intercept_ + self.slope_ * temperatures
+        return self.intercept_.magnitude + self.slope_.magnitude * temperatures
 
     def plot(self, ax=None, errorbar_kws=None, plot_kws=None):
         """Arrhenius plot.
@@ -211,7 +273,7 @@ class ArrheniusDiffusion:
         kwargs
             additional keyword arguments that are passed and are documented in
             `pandas.DataFrame.to_csv`. Default values are
-            `path_or_buf="arrhenius.csv"` and `ignore=False`.
+            `path_or_buf="arrhenius.csv"` and `index=False`.
         """
         kwargs = {} if kwargs is None else kwargs
 
