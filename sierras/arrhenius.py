@@ -174,12 +174,11 @@ class ArrheniusDiffusion:
 
         Returns
         -------
-        tuple
-            a tuple with two `pint.UnitRegistry.Quantity` objects, the
-            extrapolated diffusion coefficient at the desired temperature in
-            the specified units of the system (distance ** 2 / time) and the
-            respective error, if this was not possible to calculate, if not
-            then is None.
+        `pint.UnitRegistry.Quantity`
+            a `pint.UnitRegistry.Quantity` object with the extrapolated
+            diffusion coefficient at the desired temperature in the specified
+            units of the system (distance ** 2 / time) and the respective
+            error if this was possible to calculate, if not then is None.
         """
         dtemp = Q_(dtemp, ureg(self.sysunits["temperature"]))
         self.dcoeff_ = np.exp(
@@ -205,7 +204,11 @@ class ArrheniusDiffusion:
             else None
         )
 
-        return self.dcoeff_, self.dcoefferr_
+        return (
+            self.dcoeff_
+            if self.dcoefferr_ is None
+            else self.dcoeff_.plus_minus(self.dcoefferr_)
+        )
 
     def activation_energy(self):
         """Get the activation energy from the fit slope.

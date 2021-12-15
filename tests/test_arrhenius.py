@@ -233,13 +233,13 @@ def test_arrhenius_diffusion_extrapolate(temps, dcoeffs, dcoeffserr, ref):
         temps, dcoeffs, differr=dcoeffserr
     )
     arrhenius.fit()
-    damb, damberr = arrhenius.extrapolate()
+    damb = arrhenius.extrapolate()
 
-    np.testing.assert_almost_equal(damb.magnitude, ref[0])
     if ref[1] is None:
-        assert damberr is ref[1]
+        np.testing.assert_almost_equal(damb.magnitude, ref[0])
     else:
-        np.testing.assert_almost_equal(damberr.magnitude, ref[1])
+        np.testing.assert_almost_equal(damb.value.magnitude, ref[0])
+        np.testing.assert_almost_equal(damb.error.magnitude, ref[1])
 
     assert str(damb.units) == "centimeter ** 2 / second"
 
