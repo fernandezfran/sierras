@@ -97,6 +97,31 @@ TEST_DATA_PATH = pathlib.Path(
             (-1919.8839, -1.8267787),
             (4, 7),
         ),
+        (  # roughly equivalent to de Wei-Zhong LJ 2008 Kubo-Green data.
+            np.array(
+                [
+                    0.7000154,
+                    0.80037778,
+                    0.90050338,
+                    1.00071451,
+                    1.10114817,
+                    1.20103096,
+                ]
+            ) * 1_000,
+            np.array(
+                [
+                    0.03800871,
+                    0.04596339,
+                    0.05495668,
+                    0.0619257,
+                    0.07191,
+                    0.08090012,
+                ]
+            ),
+            None,
+            (-1258.7578, -1.49366295),
+            (4, 7),
+        ),
     ],
 )
 def test_arrhenius_diffusion_fit(temps, dcoeffs, dcoeffserr, ref, decimal):
@@ -173,6 +198,30 @@ def test_arrhenius_diffusion_fit(temps, dcoeffs, dcoeffserr, ref, decimal):
             ),
             None,
             (0.0002674998, None),
+        ),
+        (  # roughly equivalent to de Wei-Zhong LJ 2008 Kubo-Green data.
+            np.array(
+                [
+                    0.7000154,
+                    0.80037778,
+                    0.90050338,
+                    1.00071451,
+                    1.10114817,
+                    1.20103096,
+                ]
+            ) * 1_000,
+            np.array(
+                [
+                    0.03800871,
+                    0.04596339,
+                    0.05495668,
+                    0.0619257,
+                    0.07191,
+                    0.08090012,
+                ]
+            ),
+            None,
+            (0.0033812, None),
         ),
     ],
 )
@@ -254,6 +303,30 @@ def test_arrhenius_diffusion_extrapolate(temps, dcoeffs, dcoeffserr, ref):
             None,
             0.16544279,
         ),
+        (  # roughly equivalent to de Wei-Zhong LJ 2008 Kubo-Green data.
+            np.array(
+                [
+                    0.7000154,
+                    0.80037778,
+                    0.90050338,
+                    1.00071451,
+                    1.10114817,
+                    1.20103096,
+                ]
+            ) * 1_000,
+            np.array(
+                [
+                    0.03800871,
+                    0.04596339,
+                    0.05495668,
+                    0.0619257,
+                    0.07191,
+                    0.08090012,
+                ]
+            ),
+            None,
+            0.1084714,
+        ),
     ],
 )
 def test_arrhenius_diffusion_activation_energy(
@@ -325,6 +398,29 @@ def test_arrhenius_diffusion_activation_energy(
                     0.003090,
                     0.001521,
                     0.000681,
+                ]
+            ),
+            None,
+        ),
+        (  # roughly equivalent to de Wei-Zhong LJ 2008 Kubo-Green data.
+            np.array(
+                [
+                    0.7000154,
+                    0.80037778,
+                    0.90050338,
+                    1.00071451,
+                    1.10114817,
+                    1.20103096,
+                ]
+            ) * 1_000,
+            np.array(
+                [
+                    0.03800871,
+                    0.04596339,
+                    0.05495668,
+                    0.0619257,
+                    0.07191,
+                    0.08090012,
                 ]
             ),
             None,
@@ -420,6 +516,30 @@ def test_arrhenius_diffusion_plot(
             ),
             None,
             "desouza06-LJ.csv",
+        ),
+        (  # roughly equivalent to de Wei-Zhong LJ 2008 Kubo-Green data.
+            np.array(
+                [
+                    0.7000154,
+                    0.80037778,
+                    0.90050338,
+                    1.00071451,
+                    1.10114817,
+                    1.20103096,
+                ]
+            ) * 1_000,
+            np.array(
+                [
+                    0.03800871,
+                    0.04596339,
+                    0.05495668,
+                    0.0619257,
+                    0.07191,
+                    0.08090012,
+                ]
+            ),
+            None,
+            "wei-zhong08-KG.csv",
         ),
     ],
 )
