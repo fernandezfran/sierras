@@ -67,8 +67,8 @@ class ArrheniusDiffusion:
         # first of all, I define the units
         self.sysunits = {} if sysunits is None else sysunits
         for key, value in zip(
-            ("temperature", "distance", "time"),
-            ("kelvin", "centimeter", "second"),
+            ("temperature", "distance", "time", "energy"),
+            ("kelvin", "centimeter", "second", "eV"),
         ):
             self.sysunits.setdefault(key, value)
 
@@ -197,6 +197,8 @@ class ArrheniusDiffusion:
             self.dcoefferr_
             * ureg(self.sysunits["distance"]) ** 2
             / ureg(self.sysunits["time"])
+            if self.dcoefferr_ is not None
+            else None
         )
 
         return self.dcoeff_, self.dcoefferr_
@@ -209,7 +211,9 @@ class ArrheniusDiffusion:
         float
             the activation energy of the diffusive process.
         """
-        r_ideal_gas = Q_("boltzmann_constant").to("eV / kelvin") * Q_("mole")
+        r_ideal_gas = Q_("boltzmann_constant").to(
+            ureg(self.sysunits["energy"]) / ureg("kelvin")
+        )
         return -self.slope_ * r_ideal_gas
 
     def predict(self, temperatures):

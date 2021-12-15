@@ -62,6 +62,41 @@ TEST_DATA_PATH = pathlib.Path(
             (-8513.868, -5.089957),
             (3, 3),
         ),
+        (  # roughly equivalent to de Souza LJ 2006 data.
+            np.array(
+                [
+                    1217.694563,
+                    934.963910,
+                    863.118100,
+                    792.707095,
+                    734.074259,
+                    659.996304,
+                    597.864428,
+                    537.747162,
+                    474.885671,
+                    414.531828,
+                    356.332201,
+                ]
+            ),
+            np.array(
+                [
+                    0.031304,
+                    0.020066,
+                    0.017822,
+                    0.014099,
+                    0.011692,
+                    0.008660,
+                    0.007094,
+                    0.004650,
+                    0.003090,
+                    0.001521,
+                    0.000681,
+                ]
+            ),
+            None,
+            (-1919.8839, -1.8267787),
+            (4, 7),
+        ),
     ],
 )
 def test_arrhenius_diffusion_fit(temps, dcoeffs, dcoeffserr, ref, decimal):
@@ -105,6 +140,40 @@ def test_arrhenius_diffusion_fit(temps, dcoeffs, dcoeffserr, ref, decimal):
             ),
             (2.9132e-15, 2.9348e-15),
         ),
+        (  # roughly equivalent to de Souza LJ 2006 data.
+            np.array(
+                [
+                    1217.694563,
+                    934.963910,
+                    863.118100,
+                    792.707095,
+                    734.074259,
+                    659.996304,
+                    597.864428,
+                    537.747162,
+                    474.885671,
+                    414.531828,
+                    356.332201,
+                ]
+            ),
+            np.array(
+                [
+                    0.031304,
+                    0.020066,
+                    0.017822,
+                    0.014099,
+                    0.011692,
+                    0.008660,
+                    0.007094,
+                    0.004650,
+                    0.003090,
+                    0.001521,
+                    0.000681,
+                ]
+            ),
+            None,
+            (0.0002674998, None),
+        ),
     ],
 )
 def test_arrhenius_diffusion_extrapolate(temps, dcoeffs, dcoeffserr, ref):
@@ -116,12 +185,12 @@ def test_arrhenius_diffusion_extrapolate(temps, dcoeffs, dcoeffserr, ref):
     damb, damberr = arrhenius.extrapolate()
 
     np.testing.assert_almost_equal(damb.magnitude, ref[0])
-    # if ref[1] is None:
-    #     assert damberr is ref[1]
-    # else:
-    np.testing.assert_almost_equal(damberr.magnitude, ref[1])
+    if ref[1] is None:
+        assert damberr is ref[1]
+    else:
+        np.testing.assert_almost_equal(damberr.magnitude, ref[1])
 
-    assert str(damb.units) == str(damberr.units) == "centimeter ** 2 / second"
+    assert str(damb.units) == "centimeter ** 2 / second"
 
 
 @pytest.mark.parametrize(
@@ -151,6 +220,40 @@ def test_arrhenius_diffusion_extrapolate(temps, dcoeffs, dcoeffserr, ref):
             ),
             0.7336684,
         ),
+        (  # roughly equivalent to de Souza LJ 2006 data.
+            np.array(
+                [
+                    1217.694563,
+                    934.963910,
+                    863.118100,
+                    792.707095,
+                    734.074259,
+                    659.996304,
+                    597.864428,
+                    537.747162,
+                    474.885671,
+                    414.531828,
+                    356.332201,
+                ]
+            ),
+            np.array(
+                [
+                    0.031304,
+                    0.020066,
+                    0.017822,
+                    0.014099,
+                    0.011692,
+                    0.008660,
+                    0.007094,
+                    0.004650,
+                    0.003090,
+                    0.001521,
+                    0.000681,
+                ]
+            ),
+            None,
+            0.16544279,
+        ),
     ],
 )
 def test_arrhenius_diffusion_activation_energy(
@@ -164,7 +267,7 @@ def test_arrhenius_diffusion_activation_energy(
     acteng = arrhenius.activation_energy()
 
     np.testing.assert_almost_equal(acteng.magnitude, ref)
-    assert str(acteng.units) == "electron_volt * mole"
+    assert str(acteng.units) == "electron_volt"
 
 
 @pytest.mark.parametrize(
@@ -192,6 +295,39 @@ def test_arrhenius_diffusion_activation_energy(
                     2.85640e-09,
                 ]
             ),
+        ),
+        (  # roughly equivalent to de Souza LJ 2006 data.
+            np.array(
+                [
+                    1217.694563,
+                    934.963910,
+                    863.118100,
+                    792.707095,
+                    734.074259,
+                    659.996304,
+                    597.864428,
+                    537.747162,
+                    474.885671,
+                    414.531828,
+                    356.332201,
+                ]
+            ),
+            np.array(
+                [
+                    0.031304,
+                    0.020066,
+                    0.017822,
+                    0.014099,
+                    0.011692,
+                    0.008660,
+                    0.007094,
+                    0.004650,
+                    0.003090,
+                    0.001521,
+                    0.000681,
+                ]
+            ),
+            None,
         ),
     ],
 )
@@ -214,7 +350,7 @@ def test_arrhenius_diffusion_plot(
     exp_ax.errorbar(
         1 / temps,
         np.log(dcoeffs),
-        yerr=dcoeffserr / dcoeffs,
+        yerr=dcoeffserr / dcoeffs if dcoeffserr is not None else None,
         marker="o",
         ls="",
         label="diffusion",
@@ -225,7 +361,7 @@ def test_arrhenius_diffusion_plot(
 
 
 @pytest.mark.parametrize(
-    ("temps", "dcoeffs", "dcoeffserr"),
+    ("temps", "dcoeffs", "dcoeffserr", "reffname"),
     [
         (  # roughly equivalent to Fuller 1953 silicon data.
             np.array([1250, 1153.36, 1063.13, 970.65, 861.04, 769.34]),
@@ -249,10 +385,45 @@ def test_arrhenius_diffusion_plot(
                     2.85640e-09,
                 ]
             ),
+            "fuller53-Si.csv",
+        ),
+        (  # roughly equivalent to de Souza LJ 2006 data.
+            np.array(
+                [
+                    1217.694563,
+                    934.963910,
+                    863.118100,
+                    792.707095,
+                    734.074259,
+                    659.996304,
+                    597.864428,
+                    537.747162,
+                    474.885671,
+                    414.531828,
+                    356.332201,
+                ]
+            ),
+            np.array(
+                [
+                    0.031304,
+                    0.020066,
+                    0.017822,
+                    0.014099,
+                    0.011692,
+                    0.008660,
+                    0.007094,
+                    0.004650,
+                    0.003090,
+                    0.001521,
+                    0.000681,
+                ]
+            ),
+            None,
+            "desouza06-LJ.csv",
         ),
     ],
 )
-def test_arrhenius_diffusion_to_csv(temps, dcoeffs, dcoeffserr):
+def test_arrhenius_diffusion_to_csv(temps, dcoeffs, dcoeffserr, reffname):
     """Test the ArrheniusDiffusion class, save to csv."""
     arrhenius = sierras.arrhenius.ArrheniusDiffusion(
         temps, dcoeffs, differr=dcoeffserr
@@ -266,7 +437,7 @@ def test_arrhenius_diffusion_to_csv(temps, dcoeffs, dcoeffserr):
         writed = f.read()
     os.remove(arrhenius_test_data)
 
-    with open(TEST_DATA_PATH / "fuller53-Si.csv", "r") as f:
+    with open(TEST_DATA_PATH / reffname, "r") as f:
         expected = f.read()
 
     assert writed == expected
