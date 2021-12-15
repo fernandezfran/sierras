@@ -107,7 +107,8 @@ TEST_DATA_PATH = pathlib.Path(
                     1.10114817,
                     1.20103096,
                 ]
-            ) * 1_000,
+            )
+            * 1_000,
             np.array(
                 [
                     0.03800871,
@@ -209,7 +210,8 @@ def test_arrhenius_diffusion_fit(temps, dcoeffs, dcoeffserr, ref, decimal):
                     1.10114817,
                     1.20103096,
                 ]
-            ) * 1_000,
+            )
+            * 1_000,
             np.array(
                 [
                     0.03800871,
@@ -313,7 +315,8 @@ def test_arrhenius_diffusion_extrapolate(temps, dcoeffs, dcoeffserr, ref):
                     1.10114817,
                     1.20103096,
                 ]
-            ) * 1_000,
+            )
+            * 1_000,
             np.array(
                 [
                     0.03800871,
@@ -412,7 +415,8 @@ def test_arrhenius_diffusion_activation_energy(
                     1.10114817,
                     1.20103096,
                 ]
-            ) * 1_000,
+            )
+            * 1_000,
             np.array(
                 [
                     0.03800871,
@@ -527,7 +531,8 @@ def test_arrhenius_diffusion_plot(
                     1.10114817,
                     1.20103096,
                 ]
-            ) * 1_000,
+            )
+            * 1_000,
             np.array(
                 [
                     0.03800871,
