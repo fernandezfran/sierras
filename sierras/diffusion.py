@@ -59,8 +59,9 @@ def get_diffusion_coefficient(
     -------
     tuple
         a tuple where the first element is a float with the fitted diffusion
-        coefficient and the second element is another tuple with floats,
-        the slope and the intercept of the fit.
+        coefficient and the second element is a object of
+        `sklearn.linear_model.LinearRegression`, where different attributes
+        can be obteined (slope, intercept, etc).
     """
     stop = len(time) if stop is None else stop
 
@@ -75,4 +76,4 @@ def get_diffusion_coefficient(
 
     dcoef = reg.coef_[0] / (2 * ndim)
 
-    return dcoef, (reg.coef_[0], reg.intercept_)
+    return dcoef, reg

@@ -242,10 +242,10 @@ def test_get_diffusion_coefficient(start, stop, reference):
         ]
     )
 
-    dcoeff, (a, b) = sierras.diffusion.get_diffusion_coefficient(
+    dcoeff, reg = sierras.diffusion.get_diffusion_coefficient(
         time_data, msd_data, start=start, stop=stop
     )
 
     np.testing.assert_almost_equal(dcoeff, reference[0])
-    np.testing.assert_almost_equal(a, reference[1][0])
-    np.testing.assert_almost_equal(b, reference[1][1])
+    np.testing.assert_almost_equal(reg.coef_[0], reference[1][0])
+    np.testing.assert_almost_equal(reg.intercept_, reference[1][1])

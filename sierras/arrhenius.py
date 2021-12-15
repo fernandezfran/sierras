@@ -53,7 +53,8 @@ class ArrheniusDiffusion:
 
     sysunits : dict, optional.
         the system of units, default value is:
-        {"temperature": "kelvin", "distance": "centimeters", "time", "seconds"}
+        {"temperature": "kelvin", "distance": "centimeters", "time": "seconds",
+        "energy": "eV"}
     """
 
     def __init__(
@@ -147,7 +148,8 @@ class ArrheniusDiffusion:
         Returns
         -------
         tuple
-             a tuple with the fitted slope and intercept.
+             a tuple with two `pint.UnitRegistry.Quantity` objects, the fitted
+             slope in Kelvin units and the dimensionless intercept.
         """
         reg = sklearn.linear_model.LinearRegression(**kwargs).fit(
             self.tempinv_.reshape(-1, 1),
@@ -173,9 +175,11 @@ class ArrheniusDiffusion:
         Returns
         -------
         tuple
-            a tuple with the extrapolated diffusion coefficient at the desired
-            temperature as a first element and the respective error in the
-            second, if this was not possible to calculate, then is None.
+            a tuple with two `pint.UnitRegistry.Quantity` objects, the
+            extrapolated diffusion coefficient at the desired temperature in
+            the specified units of the system (distance ** 2 / time) and the
+            respective error, if this was not possible to calculate, if not
+            then is None.
         """
         dtemp = Q_(dtemp, ureg(self.sysunits["temperature"]))
         self.dcoeff_ = np.exp(
@@ -209,7 +213,8 @@ class ArrheniusDiffusion:
         Returns
         -------
         float
-            the activation energy of the diffusive process.
+            a `pint.UnitRegistry.Quantity` object with the activation energy
+            of the diffusive process in system energy units.
         """
         r_ideal_gas = Q_("boltzmann_constant").to(
             ureg(self.sysunits["energy"]) / ureg("kelvin")
