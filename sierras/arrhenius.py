@@ -294,7 +294,8 @@ class ArrheniusDiffusion:
             xerr=self.tempinv_err_,
             **errorbar_kws,
         )
-        ax.plot(self.tempinv_, self.predict(self.tempinv_), **plot_kws)
+        if self.slope_ or self.intercept_:
+            ax.plot(self.tempinv_, self.predict(self.tempinv_), **plot_kws)
 
         return ax
 
