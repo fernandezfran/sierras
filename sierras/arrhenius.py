@@ -120,20 +120,32 @@ class ArrheniusDiffusion:
             else None
         )
 
-    def _error_propagation(self, dtemp):
-        """Error of the extrapolation."""
-        delta = (
+    @property
+    def _delta_error(self):
+        """Slope and intercept error common denominator."""
+        return (
             np.sum(1 / self.diff_err_ ** 2)
             * np.sum((self.tempinv_ / self.diff_err_) ** 2)
             - np.sum(self.tempinv_ / self.diff_err_ ** 2) ** 2
         )
-        errslope = np.sqrt(np.sum(1 / self.diff_err_ ** 2) / delta)
-        errintercept = np.sqrt(
-            np.sum((self.tempinv_ / self.diff_err_) ** 2) / delta
+
+    @property
+    def _slope_error(self):
+        """Error of the slope."""
+        return np.sqrt(np.sum(1 / self.diff_err_ ** 2) / self._delta_error)
+
+    @property
+    def _intercept_error(self):
+        """Error of the intercept."""
+        return np.sqrt(
+            np.sum((self.tempinv_ / self.diff_err_) ** 2) / self._delta_error
         )
 
+    def _diff_error_propagation(self, dtemp):
+        """Error of the diffusion coefficient extrapolation."""
         return self.dcoeff_ * np.sqrt(
-            (errslope / dtemp.to("kelvin").magnitude) ** 2 + errintercept ** 2
+            (self._slope_error / dtemp.to("kelvin").magnitude) ** 2
+            + self._intercept_error ** 2
         )
 
     def fit(self, **kwargs):
@@ -178,7 +190,7 @@ class ArrheniusDiffusion:
             a `pint.UnitRegistry.Quantity` object with the extrapolated
             diffusion coefficient at the desired temperature in the specified
             units of the system (distance ** 2 / time) and the respective
-            error if this was possible to calculate, if not then is None.
+            error if this was possible to calculate.
         """
         dtemp = Q_(dtemp, ureg(self.sysunits["temperature"]))
         self.dcoeff_ = np.exp(
@@ -186,7 +198,7 @@ class ArrheniusDiffusion:
             + self.intercept_.magnitude
         )
         self.dcoefferr_ = (
-            self._error_propagation(dtemp)
+            self._diff_error_propagation(dtemp)
             if self.diff_err_ is not None
             else None
         )
@@ -217,12 +229,19 @@ class ArrheniusDiffusion:
         -------
         float
             a `pint.UnitRegistry.Quantity` object with the activation energy
-            of the diffusive process in system energy units.
+            of the diffusive process in system energy units and the respective
+            error if this was possible to calculate.
         """
         r_ideal_gas = Q_("boltzmann_constant").to(
             ureg(self.sysunits["energy"]) / ureg("kelvin")
         )
-        return -self.slope_ * r_ideal_gas
+        act_eng = -self.slope_ * r_ideal_gas
+
+        return (
+            act_eng
+            if self.diff_err_ is None
+            else act_eng.plus_minus(self._slope_error * r_ideal_gas.magnitude)
+        )
 
     def predict(self, temperatures):
         """Predict using the linear model.

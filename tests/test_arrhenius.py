@@ -269,7 +269,7 @@ def test_arrhenius_diffusion_extrapolate(temps, dcoeffs, dcoeffserr, ref):
                     2.85640e-09,
                 ]
             ),
-            0.7336684,
+            (0.7336684, 0.0243509),
         ),
         (  # roughly equivalent to de Souza LJ 2006 data.
             np.array(
@@ -303,7 +303,7 @@ def test_arrhenius_diffusion_extrapolate(temps, dcoeffs, dcoeffserr, ref):
                 ]
             ),
             None,
-            0.16544279,
+            (0.16544279, None),
         ),
         (  # roughly equivalent to de Wei-Zhong LJ 2008 Kubo-Green data.
             np.array(
@@ -328,7 +328,7 @@ def test_arrhenius_diffusion_extrapolate(temps, dcoeffs, dcoeffserr, ref):
                 ]
             ),
             None,
-            0.1084714,
+            (0.1084714, None),
         ),
     ],
 )
@@ -342,7 +342,12 @@ def test_arrhenius_diffusion_activation_energy(
     arrhenius.fit()
     acteng = arrhenius.activation_energy()
 
-    np.testing.assert_almost_equal(acteng.magnitude, ref)
+    if ref[1] is None:
+        np.testing.assert_almost_equal(acteng.magnitude, ref[0])
+    else:
+        np.testing.assert_almost_equal(acteng.value.magnitude, ref[0])
+        np.testing.assert_almost_equal(acteng.error.magnitude, ref[1])
+
     assert str(acteng.units) == "electron_volt"
 
 
