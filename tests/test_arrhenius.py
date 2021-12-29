@@ -59,7 +59,7 @@ TEST_DATA_PATH = pathlib.Path(
                     2.85640e-09,
                 ]
             ),
-            (-8513.868, -5.089957),
+            (-9196.819, -4.394486),
             (3, 3),
         ),
         (  # roughly equivalent to de Souza LJ 2006 data.
@@ -269,7 +269,7 @@ def test_arrhenius_diffusion_extrapolate(temps, dcoeffs, dcoeffserr, ref):
                     2.85640e-09,
                 ]
             ),
-            (0.7336684, 0.0243509),
+            (0.79252057, 0.0243509),
         ),
         (  # roughly equivalent to de Souza LJ 2006 data.
             np.array(
@@ -468,30 +468,6 @@ def test_arrhenius_diffusion_plot(
 @pytest.mark.parametrize(
     ("temps", "dcoeffs", "dcoeffserr", "reffname"),
     [
-        (  # roughly equivalent to Fuller 1953 silicon data.
-            np.array([1250, 1153.36, 1063.13, 970.65, 861.04, 769.34]),
-            np.array(
-                [
-                    7.72104e-06,
-                    4.386714e-06,
-                    2.23884e-06,
-                    5.58574e-07,
-                    5.15115e-07,
-                    7.58213e-08,
-                ]
-            ),
-            np.array(
-                [
-                    1.42028e-06,
-                    9.239103e-07,
-                    6.98605e-07,
-                    1.93034e-07,
-                    1.18240e-07,
-                    2.85640e-09,
-                ]
-            ),
-            "fuller53-Si.csv",
-        ),
         (  # roughly equivalent to de Souza LJ 2006 data.
             np.array(
                 [
@@ -550,6 +526,30 @@ def test_arrhenius_diffusion_plot(
             ),
             None,
             "wei-zhong08-KG.csv",
+        ),
+        (  # roughly equivalent to Fuller 1953 silicon data.
+            np.array([1250, 1153.36, 1063.13, 970.65, 861.04, 769.34]),
+            np.array(
+                [
+                    7.72104e-06,
+                    4.386714e-06,
+                    2.23884e-06,
+                    5.58574e-07,
+                    5.15115e-07,
+                    7.58213e-08,
+                ]
+            ),
+            np.array(
+                [
+                    1.42028e-06,
+                    9.239103e-07,
+                    6.98605e-07,
+                    1.93034e-07,
+                    1.18240e-07,
+                    2.85640e-09,
+                ]
+            ),
+            "fuller53-Si.csv",
         ),
     ],
 )

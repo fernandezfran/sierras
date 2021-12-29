@@ -166,7 +166,9 @@ class ArrheniusDiffusion:
         reg = sklearn.linear_model.LinearRegression(**kwargs).fit(
             self.tempinv_.reshape(-1, 1),
             self.diff_,
-            sample_weight=self.diff_err_,
+            sample_weight=1 / self.diff_err_
+            if self.diff_err_ is not None
+            else None,
         )
 
         self.slope_ = Q_(reg.coef_[0], ureg(self.sysunits["temperature"])).to(
