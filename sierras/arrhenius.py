@@ -301,19 +301,14 @@ class ArrheniusDiffusion:
 
         return ax
 
-    def to_csv(self, **kwargs):
-        """Write the results to a comma-separated values (csv) file.
+    def to_dataframe(self):
+        """Convert the results to a pandas.DataFrame.
 
-        kwargs
-            additional keyword arguments that are passed and are documented in
-            `pandas.DataFrame.to_csv`. Default values are
-            `path_or_buf="arrhenius.csv"` and `index=False`.
+        Returns
+        -------
+        df : pandas.DataFrame
+            DataFrame with all the data.
         """
-        kwargs = {} if kwargs is None else kwargs
-
-        kwargs.setdefault("path_or_buf", "arrhenius.csv")
-        kwargs.setdefault("index", False)
-
         dict_ = {
             "temperatures-inv": self.tempinv_,
             "values-diffusion-log": self.diff_,
@@ -326,4 +321,4 @@ class ArrheniusDiffusion:
         if self.tempinv_err_ is not None:
             dict_["temperatures-inv-err"] = self.tempinv_err_
 
-        pd.DataFrame(dict_).to_csv(**kwargs)
+        return pd.DataFrame(dict_)

@@ -17,6 +17,8 @@ from matplotlib.testing.decorators import check_figures_equal
 
 import numpy as np
 
+import pandas as pd
+
 import pytest
 
 import sierras.arrhenius
@@ -555,19 +557,12 @@ def test_arrhenius_diffusion_plot(
 )
 def test_arrhenius_diffusion_to_csv(temps, dcoeffs, dcoeffserr, reffname):
     """Test the ArrheniusDiffusion class, save to csv."""
+    df_ref = pd.read_csv(str(TEST_DATA_PATH / reffname), dtype=np.float32)
+
     arrhenius = sierras.arrhenius.ArrheniusDiffusion(
         temps, dcoeffs, differr=dcoeffserr
     )
     arrhenius.fit()
+    df = arrhenius.to_dataframe()
 
-    arrhenius_test_data = str(TEST_DATA_PATH / "arrhenius.csv")
-    arrhenius.to_csv(path_or_buf=arrhenius_test_data)
-
-    with open(arrhenius_test_data, "r") as f:
-        writed = f.read()
-    os.remove(arrhenius_test_data)
-
-    with open(TEST_DATA_PATH / reffname, "r") as f:
-        expected = f.read()
-
-    assert writed == expected
+    pd.testing.assert_frame_equal(df, df_ref)
