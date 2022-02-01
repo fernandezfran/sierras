@@ -110,7 +110,7 @@ class ArrheniusDiffusion:
 
         # error propagation by partial derivatives:
         self.tempinv_err_ = (
-            self.temperr.magnitude / (self.temperatures.magnitude ** 2)
+            self.temperr.magnitude / (self.temperatures.magnitude ** 2)  # noqa
             if self.temperr is not None
             else None
         )
