@@ -50,7 +50,8 @@ pip install -e .
 
 ## Usage
 
-To start using sierras you can read the tutorial and the API.
+To start using sierras you can read the [tutorial](https://sierras.readthedocs.io/en/latest/tutorial.html) 
+and the [API](https://sierras.readthedocs.io/en/latest/api.html).
 
 
 ## License
