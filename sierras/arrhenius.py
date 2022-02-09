@@ -157,11 +157,13 @@ class ArrheniusDiffusion:
             additional keyword arguments that are passed and are documented in
             `sklearn.linear_model.LinearRegression`.
 
-        Returns
-        -------
-        tuple
-             a tuple with two `pint.UnitRegistry.Quantity` objects, the fitted
-             slope in Kelvin units and the dimensionless intercept.
+        Attributes
+        ----------
+        slope_ : `pint.UnitRegistry.Quantity`
+            the fitted slope in Kelvin units.
+
+        intercept_ : `pint.UnitRegistry.Quantity`
+            the dimensionless intercept.
         """
         reg = sklearn.linear_model.LinearRegression(**kwargs).fit(
             self.tempinv_.reshape(-1, 1),
@@ -176,7 +178,7 @@ class ArrheniusDiffusion:
         )
         self.intercept_ = reg.intercept_ * ureg("dimensionless")
 
-        return self.slope_, self.intercept_
+        return self
 
     def extrapolate(self, dtemp=300.0):
         """Extrapolates the diffusion coefficient at a desired temperature.

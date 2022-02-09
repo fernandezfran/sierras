@@ -132,13 +132,15 @@ def test_arrhenius_diffusion_fit(temps, dcoeffs, dcoeffserr, ref, decimal):
     arrhenius = sierras.arrhenius.ArrheniusDiffusion(
         temps, dcoeffs, differr=dcoeffserr
     )
-    slope, intercept = arrhenius.fit()
+    model = arrhenius.fit()
 
-    np.testing.assert_almost_equal(slope.magnitude, ref[0], decimal[0])
-    np.testing.assert_almost_equal(intercept.magnitude, ref[1], decimal[1])
+    np.testing.assert_almost_equal(model.slope_.magnitude, ref[0], decimal[0])
+    np.testing.assert_almost_equal(
+        model.intercept_.magnitude, ref[1], decimal[1]
+    )
 
-    assert str(slope.units) == "kelvin"
-    assert str(intercept.units) == "dimensionless"
+    assert str(model.slope_.units) == "kelvin"
+    assert str(model.intercept_.units) == "dimensionless"
 
 
 @pytest.mark.parametrize(
@@ -446,7 +448,8 @@ def test_arrhenius_diffusion_plot(
     arrhenius = sierras.arrhenius.ArrheniusDiffusion(
         temps, dcoeffs, differr=dcoeffserr
     )
-    slope, intercept = arrhenius.fit()
+    model = arrhenius.fit()
+    slope, intercept = model.slope_, model.intercept_
 
     # test
     test_ax = fig_test.subplots()
