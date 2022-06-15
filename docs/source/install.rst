@@ -6,7 +6,7 @@ Stable release
 --------------
 
 To install the most recent stable release of sierras with 
-`pip <https://pip.pypa.io/en/stable/>`__,  run the following command in your 
+`pip <https://pip.pypa.io/en/stable/>`__, run the following command in your 
 termninal: ::
 
     pip install sierras

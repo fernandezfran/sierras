@@ -45,8 +45,11 @@ class ArrheniusDiffusion:
 
     Parameters
     ----------
-    temperatures, diffusion coefficient : array-like
-        temperatures and corresponding diffusion coefficients data.
+    temperatures : array-like
+        temperatures data.
+
+    diffusion coefficient : array-like
+        corresponding diffusion coefficients data to the above temperatures.
 
     temperr, differr : array-like, optional
         the error of each data point.
