@@ -24,8 +24,8 @@ sierras
    :alt: Curso doctoral FAMAF: Diseño de software para cómputo científico
 
 
-**sierras** is a python module that allows to perform arrhenius plots for
-diffusion coefficients and extrapolate to desired temperatures.
+**sierras** is a Python package to fit the arrhenius equation to diffusion 
+coeffcients data, extrapolate to room temperature and plot
 
 Motivation
 ----------
