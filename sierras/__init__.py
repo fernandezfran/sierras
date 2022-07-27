@@ -37,7 +37,7 @@ activation energy.
 
 __author__ = "Francisco Fernandez"
 __email__ = "fernandezfrancisco2195@gmail.com"
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 
 # ============================================================================
@@ -45,4 +45,4 @@ __version__ = "0.1.0"
 # ============================================================================
 
 from .arrhenius import ArrheniusDiffusion  # noqa
-from .diffusion import get_diffusion_coefficient  # noqa
+from .get_diffusion_coefficient import from_msd, from_vacf  # noqa

@@ -25,10 +25,10 @@ Submodules
    :show-inheritance:
    :member-order: bysource
 
-``sierras.diffusion`` module
-----------------------------
+``sierras.get_diffusion_coefficient`` module
+--------------------------------------------
 
-.. automodule:: sierras.diffusion
+.. automodule:: sierras.get_diffusion_coefficient
    :members:
    :undoc-members:
    :show-inheritance:

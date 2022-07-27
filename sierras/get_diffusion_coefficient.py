@@ -10,7 +10,7 @@
 # DOCS
 # ============================================================================
 
-"""Function to fit the mean square displacement."""
+"""Functions to obtain the diffusion coefficient."""
 
 # ============================================================================
 # IMPORTS
@@ -25,7 +25,7 @@ import sklearn.linear_model
 # ============================================================================
 
 
-def get_diffusion_coefficient(
+def from_msd(
     time, msd, start=0, stop=None, ndim=3, sample_weight=None, lr_kws=None
 ):
     """To obtain the trace diffusion coefficient from mean square displacement.
@@ -77,3 +77,8 @@ def get_diffusion_coefficient(
     dcoef = reg.coef_[0] / (2 * ndim)
 
     return dcoef, reg
+
+
+def from_vacf():
+    """To obtain it from the velocity autocorrelation function."""
+    raise NotImplementedError

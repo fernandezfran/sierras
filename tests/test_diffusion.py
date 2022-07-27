@@ -14,7 +14,7 @@ import numpy as np
 
 import pytest
 
-import sierras.diffusion
+import sierras.get_diffusion_coefficient
 
 # ============================================================================
 # TESTS
@@ -31,7 +31,7 @@ import sierras.diffusion
         (0, 50, (0.70261868, (4.215712, -0.1003175))),
     ],
 )
-def test_get_diffusion_coefficient(start, stop, reference):
+def test_get_diffusion_coefficient_from_msd(start, stop, reference):
     """Test the linear regression to get the trace diffusion coefficient.
 
     This test uses data of a Lennard-Jones fluid in its liquid phase.
@@ -242,7 +242,7 @@ def test_get_diffusion_coefficient(start, stop, reference):
         ]
     )
 
-    dcoeff, reg = sierras.diffusion.get_diffusion_coefficient(
+    dcoeff, reg = sierras.get_diffusion_coefficient.from_msd(
         time_data, msd_data, start=start, stop=stop
     )
 
