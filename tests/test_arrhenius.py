@@ -97,7 +97,7 @@ TEST_DATA_PATH = pathlib.Path(
             ),
             None,
             (-1919.8839, -1.8267787),
-            (4, 7),
+            (3, 5),
         ),
         (  # roughly equivalent to de Wei-Zhong LJ 2008 Kubo-Green data.
             np.array(
@@ -123,7 +123,7 @@ TEST_DATA_PATH = pathlib.Path(
             ),
             None,
             (-1258.7578, -1.49366295),
-            (4, 7),
+            (3, 5),
         ),
     ],
 )
@@ -440,7 +440,7 @@ def test_arrhenius_diffusion_activation_energy(
         ),
     ],
 )
-@check_figures_equal(extensions=["png", "pdf"], tol=0.005)
+@check_figures_equal(extensions=["png", "pdf"], tol=0.01)
 def test_arrhenius_diffusion_plot(
     fig_test, fig_ref, temps, dcoeffs, dcoeffserr
 ):
