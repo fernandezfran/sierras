@@ -1,3 +1,51 @@
+# =============================================================================
+# PACKAGING
+# =============================================================================
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sierras"
+version = "0.2.0"
+authors = [{name = "Francisco Fernandez", email = "fernandezfrancisco2195@gmail.com"}]
+readme = "README.md"
+license = {file = "LICENSE"}
+description = "A tool for empirical Arrhenius equation fitting for physicochemical processes."
+keywords = [
+    "arrhenius-process",
+    "arrhenius-equation",
+    "arrhenius-fitting",
+    "arrhenius-plot",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering",
+]
+urls = { Homepage = "https://github.com/fernandezfran/sierras" }
+dependencies = [
+    "importlib_metadata",
+    "matplotlib",
+    "numpy",
+    "pandas",
+    "scikit-learn",
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["sierras"]
+namespaces = false
+
 [tool.black]
 line-length = 79
-target-version = ['py39']
+target-version = ["py39"]

@@ -1,8 +1,10 @@
 include LICENSE
 include README.md
+include pyproject.toml
+include sierras.py
 
 exclude tox.ini
-exclude pyproject.toml
 exclude .readthedocs.yml
+
 recursive-exclude tests *
 recursive-exclude docs *
