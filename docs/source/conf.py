@@ -31,7 +31,7 @@ copyright = '2021, Francisco Fernandez'
 author = 'Francisco Fernandez'
 
 # The full version, including alpha/beta/rc tags
-release = sierras.__version__
+release = sierras.VERSION
 
 
 # -- General configuration ---------------------------------------------------

@@ -40,11 +40,7 @@ dependencies = [
 ]
 
 [tool.setuptools]
-include-package-data = true
-
-[tool.setuptools.packages.find]
-include = ["sierras"]
-namespaces = false
+py-modules = ["sierras"]
 
 [tool.black]
 line-length = 79

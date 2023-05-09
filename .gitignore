@@ -10,4 +10,4 @@ result_images/
 
 build/
 dist/
-sierras.egg-info/
+*.egg-info/

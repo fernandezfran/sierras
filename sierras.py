@@ -20,12 +20,16 @@ temperature dependence of a process given by the following equation
 
 where
 
-- :math:`k` is the thermally-induced process (diffusion coefficient, frequency
-of collision, crystal vacancies, among others),
+- :math:`k` is the thermally-induced process (diffusion coefficient,
+  frequency of collision, crystal vacancies, among others),
+
 - :math:`k_0` is the pre-exponential factor,
+
 - :math:`E` is the activation energy of the process,
+
 - :math:`k_B` is the Boltzmann constant, it could also be the universal gas
-constant :math:`R`,
+  constant :math:`R`,
+
 - :math:`T` is the Temperature in Kelvin,
 
 The exponential factor in this equation gives the probability that the process
@@ -87,25 +91,26 @@ class ArrheniusRegressor(BaseEstimator, RegressorMixin):
 
     Parameters
     ----------
+    constant : float
+        Either the universal gas constant, :math:`R`, or the Boltzmann
+        constant, :math:`k_B`.
+
     **kwargs
         Keyword arguments that are passed and are documented in
         `sklearn.linear_model.LinearRegression`.
 
     Notes
     -----
-    By performing ``self.predict([[300.0]])`` you get the thermally-induced
-    process extrapolated at room temperature.
+    By performing ``self.predict(np.array([[300.0]]))`` you get the
+    thermally-induced process extrapolated at room temperature.
 
     Attributes
     ----------
-    constant : float
-        Either the universal gas constant, :math:`R`, or the Boltzmann
-        constant, :math:`k_B`.
-
     activation_energy_ : float
         Activation energy of the process
     """
-    def __init__(self, constant, kwargs):
+
+    def __init__(self, constant, **kwargs):
         self.constant = constant
         self.reg = sklearn.linear_model.LinearRegression(**kwargs)
 
@@ -131,7 +136,7 @@ class ArrheniusRegressor(BaseEstimator, RegressorMixin):
 
         self.reg.fit(self._X, self._y, self._sample_weight)
 
-        self.activation_energy_ = - self.constant * self.reg.coef_[0]
+        self.activation_energy_ = -self.constant * self.reg.coef_[0]
 
         return self
 
@@ -176,7 +181,7 @@ class ArrheniusRegressor(BaseEstimator, RegressorMixin):
     @property
     def plot(self):
         """Arrhenius plot accessor."""
-        ArrheniusPlotter(self)
+        return ArrheniusPlotter(self)
 
 
 class ArrheniusPlotter:
@@ -187,6 +192,7 @@ class ArrheniusPlotter:
     areg : sierras.ArrheniusRegressor
         An ArrheniusRegressor already fitted.
     """
+
     def __init__(self, areg):
         self.areg = areg
 
@@ -223,12 +229,12 @@ class ArrheniusPlotter:
 
         ax.errorbar(
             self.areg._X,
-            self.areg._Y,
+            self.areg._y,
             yerr=self.areg._sample_weight,
-            **data_kws
+            **data_kws,
         )
         ax.plot(
-            1 / self.areg._X, self.areg.reg.predict(self.areg._X), **pred_kws
+            self.areg._X, self.areg.reg.predict(self.areg._X), **pred_kws
         )
 
         return ax
