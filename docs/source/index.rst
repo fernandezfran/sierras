@@ -24,17 +24,7 @@ sierras
    :alt: Curso doctoral FAMAF: Diseño de software para cómputo científico
 
 
-**sierras** is a Python package to fit the arrhenius equation to diffusion 
-coeffcients data, extrapolate to room temperature and plot
-
-Motivation
-----------
-
-Obtaining room temperature trace diffusion coefficients from computational 
-simulations exceeds the reasonable computational time that a simulation may 
-require. Therefore, it is necessary to measure at different high temperatures, 
-where diffusive processes are favored, to fit through an Arrhenius equation 
-type and extrapolate to room temperature.
+**sierras** is a tool for empirical Arrhenius equation fitting for physicochemical processes.
 
 
 Requirements

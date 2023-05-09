@@ -3,52 +3,29 @@
 [![Github Actions CI](https://github.com/fernandezfran/sierras/actions/workflows/sierras_ci.yml/badge.svg)](https://github.com/fernandezfran/sierras/actions/workflows/sierras_ci.yml)
 [![Documentation Status](https://readthedocs.org/projects/sierras/badge/?version=latest)](https://sierras.readthedocs.io/en/latest/?badge=latest)
 [![PyPI](https://img.shields.io/pypi/v/sierras)](https://pypi.org/project/sierras/)
-[![downloads](https://static.pepy.tech/badge/sierras)](https://pepy.tech/project/sierras)
 [![python version](https://img.shields.io/badge/python-3.8%2B-77b7fe)](https://www.python.org/)
-[![mit license](https://img.shields.io/badge/License-MIT-fcf695)](https://github.com/fernandezfran/galpynostatic/blob/main/LICENSE)
+[![mit license](https://img.shields.io/badge/License-MIT-fcf695)](https://github.com/fernandezfran/sierras/blob/main/LICENSE)
 [![diseno_sci_sfw](https://img.shields.io/badge/DiSoftCompCi-FAMAF-ffda00)](https://github.com/leliel12/diseno_sci_sfw)
+[![downloads](https://static.pepy.tech/badge/sierras)](https://pepy.tech/project/sierras)
 
-**sierras** is a Python package to fit the arrhenius equation to diffusion coefficients data, extrapolate to room temperature and plot
-
-
-## Motivation
-
-Obtaining room temperature trace diffusion coefficients from computational 
-simulations exceeds the reasonable computational time that a simulation may 
-require. Therefore, it is necessary to measure at different high temperatures, 
-where diffusive processes are favored, to fit through an Arrhenius equation 
-type and extrapolate to room temperature.
+**sierras** is a tool for empirical Arrhenius equation fitting for physicochemical processes.
 
 
 ## Requirements
 
-You need Python 3.9+ to run sierras.
+You need Python 3.8+ to run sierras.
 
 
 ## Installation
 
-### Stable release
+You can install the most recent stable release of sierras with 
+[pip](https://pip.pypa.io/en/latest/)
 
-To install the most recent stable release of sierras with [pip](https://pip.pypa.io/en/stable/), 
-run the following command in your termninal:
-
-```bash
-pip install sierras
+```
+python -m pip install -U pip
+python -m pip install -U sierras
 ```
 
-### From sources
-
-To installing it from sources you can clone this [GitHub repo](https://github.com/fernandezfran/sierras) 
-
-```bash
-git clone https://github.com/fernandezfran/sierras.git
-```
-
-and inside your local directory install it in the following way 
-
-```bash
-pip install -e .
-```
 
 ## Usage
 
