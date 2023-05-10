@@ -24,7 +24,8 @@ sierras
    :alt: Curso doctoral FAMAF: Diseño de software para cómputo científico
 
 
-**sierras** is a tool for empirical Arrhenius equation fitting for physicochemical processes.
+**sierras** is a tool for empirical Arrhenius equation fitting for 
+thermally-induced physicochemical processes.
 
 
 Requirements

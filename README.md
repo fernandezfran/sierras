@@ -8,7 +8,8 @@
 [![diseno_sci_sfw](https://img.shields.io/badge/DiSoftCompCi-FAMAF-ffda00)](https://github.com/leliel12/diseno_sci_sfw)
 [![downloads](https://static.pepy.tech/badge/sierras)](https://pepy.tech/project/sierras)
 
-**sierras** is a tool for empirical Arrhenius equation fitting for physicochemical processes.
+**sierras** is a tool for empirical Arrhenius equation fitting for 
+thermally-induced physicochemical processes.
 
 
 ## Requirements

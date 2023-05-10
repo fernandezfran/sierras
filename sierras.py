@@ -233,8 +233,6 @@ class ArrheniusPlotter:
             yerr=self.areg._sample_weight,
             **data_kws,
         )
-        ax.plot(
-            self.areg._X, self.areg.reg.predict(self.areg._X), **pred_kws
-        )
+        ax.plot(self.areg._X, self.areg.reg.predict(self.areg._X), **pred_kws)
 
         return ax
