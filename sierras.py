@@ -68,7 +68,7 @@ from sklearn.base import BaseEstimator, RegressorMixin
 # CONSTANTS
 # =============================================================================
 
-__all__ = ["ArrheniusPlotter", "ArrheniusRegressor"]
+__all__ = ["ArrheniusRegressor", "ArrheniusPlotter"]
 
 
 NAME = "sierras"

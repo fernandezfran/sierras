@@ -3,6 +3,7 @@ include README.md
 include pyproject.toml
 include sierras.py
 
+exclude requirements_dev.txt
 exclude tox.ini
 exclude .readthedocs.yml
 
