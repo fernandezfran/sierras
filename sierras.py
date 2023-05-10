@@ -169,14 +169,18 @@ class ArrheniusRegressor(BaseEstimator, RegressorMixin):
         pandas.DataFrame
             A pandas.DataFrame with the data.
         """
-        return pd.DataFrame(
+        df = pd.DataFrame(
             {
-                "temperatures": X,
+                "temperatures": X.ravel(),
                 "reaction_rate": y,
                 "reaction_rate_pred": self.predict(X),
-                "weights": sample_weight,
             }
         )
+
+        if sample_weight is not None:
+            df["weights"] = sample_weight
+
+        return df
 
     @property
     def plot(self):

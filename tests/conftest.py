@@ -23,18 +23,6 @@ import pytest
 
 
 @pytest.fixture()
-def k_boltzmann():
-    return 8.617333262e-5
-
-
-@pytest.fixture()
-def data_path():
-    return pathlib.Path(
-        os.path.join(os.path.abspath(os.path.dirname(__file__)), "test_data")
-    )
-
-
-@pytest.fixture()
 def fuller53():
     return {
         "X": np.array(

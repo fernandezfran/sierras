@@ -52,19 +52,6 @@ class TestArrheniusRegressor:
             areg.reg.intercept_, dataset["ref"]["intercept"]
         )
 
-    def test_activation_energy(self, dataset, request):
-        """Test the activation energy."""
-        dataset = request.getfixturevalue(dataset)
-
-        areg = sierras.ArrheniusRegressor(BOLTZMANN)
-        areg.fit(
-            dataset["X"], dataset["y"], sample_weight=dataset["sample_weight"]
-        )
-
-        np.testing.assert_almost_equal(
-            areg.activation_energy_, dataset["ref"]["activation_energy"]
-        )
-
     def test_predict(self, dataset, request):
         """Test the prediction of the thermally-induced process."""
         dataset = request.getfixturevalue(dataset)
@@ -77,6 +64,45 @@ class TestArrheniusRegressor:
         pred = areg.predict(dataset["X"])
 
         np.testing.assert_almost_equal(pred, dataset["ref"]["pred"])
+
+    def test_to_dataframe(self, dataset, request):
+        """Test the dataframe."""
+        dataset = request.getfixturevalue(dataset)
+
+        areg = sierras.ArrheniusRegressor(BOLTZMANN)
+        areg.fit(
+            dataset["X"], dataset["y"], sample_weight=dataset["sample_weight"]
+        )
+
+        pred = areg.predict(dataset["X"])
+        df_ref = pd.DataFrame(
+            {
+                "temperatures": dataset["X"].ravel(),
+                "reaction_rate": dataset["y"],
+                "reaction_rate_pred": pred,
+            }
+        )
+        if dataset["sample_weight"] is not None:
+            df_ref["weights"] = dataset["sample_weight"]
+
+        df = areg.to_dataframe(
+            dataset["X"], dataset["y"], sample_weight=dataset["sample_weight"]
+        )
+
+        assert df.equals(df_ref)
+
+    def test_activation_energy(self, dataset, request):
+        """Test the activation energy."""
+        dataset = request.getfixturevalue(dataset)
+
+        areg = sierras.ArrheniusRegressor(BOLTZMANN)
+        areg.fit(
+            dataset["X"], dataset["y"], sample_weight=dataset["sample_weight"]
+        )
+
+        np.testing.assert_almost_equal(
+            areg.activation_energy_, dataset["ref"]["activation_energy"]
+        )
 
     def test_extrapolation_at_room_temperature(self, dataset, request):
         """Test the extrapolation at room temperature of the process."""
