@@ -30,7 +30,25 @@ python -m pip install -U sierras
 
 ## Usage
 
-To start using sierras you can read the [tutorial](https://sierras.readthedocs.io/en/latest/tutorial.html) 
+A simple example of use:
+
+```python
+import sierras
+
+k_boltzmann = 8.617333262e-5  # eV / K
+areg = sierras.ArrheniusRegressor(k_boltzmann)
+
+areg.fit(Temperatures, target_process)
+
+areg.activation_energy_  # in this case in eV
+areg.predict(np.array([[300.0]]))  # extrapolated process at room temperature
+
+areg.plot.arrhenius(Temperatures, target_process)  # plot the fitting
+```
+
+
+You can also read the 
+[tutorial](https://sierras.readthedocs.io/en/latest/tutorial.html) 
 and the [API](https://sierras.readthedocs.io/en/latest/api.html).
 
 
