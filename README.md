@@ -41,7 +41,7 @@ areg = sierras.ArrheniusRegressor(k_boltzmann)
 areg.fit(Temperatures, target_process)
 
 areg.activation_energy_  # in this case in eV
-areg.predict(np.array([[300.0]]))  # extrapolated process at room temperature
+areg.extrapolated_process_  # extrapolated process at room temperature
 
 areg.plot.arrhenius(Temperatures, target_process)  # plot the fitting
 ```

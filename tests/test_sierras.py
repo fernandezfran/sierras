@@ -43,10 +43,10 @@ class TestArrheniusRegressor:
         )
 
         np.testing.assert_almost_equal(
-            areg.reg.coef_[0], dataset["ref"]["slope"]
+            areg.reg_.coef_[0], dataset["ref"]["slope"]
         )
         np.testing.assert_almost_equal(
-            areg.reg.intercept_, dataset["ref"]["intercept"]
+            areg.reg_.intercept_, dataset["ref"]["intercept"]
         )
 
     def test_predict(self, dataset, request):

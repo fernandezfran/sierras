@@ -87,7 +87,7 @@ del importlib_metadata
 
 
 class ArrheniusRegressor(BaseEstimator, RegressorMixin):
-    """Arrhenius equation fitting.
+    r"""Arrhenius equation fitting.
 
     Parameters
     ----------
@@ -97,22 +97,26 @@ class ArrheniusRegressor(BaseEstimator, RegressorMixin):
 
     **kwargs
         Keyword arguments that are passed and are documented in
-        `sklearn.linear_model.LinearRegression`.
-
-    Notes
-    -----
-    By performing ``self.predict(np.array([[300.0]]))`` you get the
-    thermally-induced process extrapolated at room temperature.
+        ``sklearn.linear_model.LinearRegression``.
 
     Attributes
     ----------
     activation_energy_ : float
-        Activation energy of the process
+        Activation energy of the process, this is the same as
+        ``-self.constant * self.reg_.coef_[0]``.
+
+    extrapolated_process_ : float
+        The extrapolation at room temperature of the thermally-induced
+        process, note that this is the same that
+        ``self.predict(np.array([[300.0]]))[0]``.
+
+    reg_ : sklearn.linear_model.LinearRegressor
+        The linear regressor for :math:`\ln k` versus :math:`\frac{1}{T}`.
     """
 
     def __init__(self, constant, **kwargs):
         self.constant = constant
-        self.reg = sklearn.linear_model.LinearRegression(**kwargs)
+        self.reg_ = sklearn.linear_model.LinearRegression(**kwargs)
 
     def fit(self, X, y, sample_weight=None):
         """Fit the Arrhenius empirical equation.
@@ -134,9 +138,10 @@ class ArrheniusRegressor(BaseEstimator, RegressorMixin):
             sample_weight / y if sample_weight is not None else None
         )
 
-        self.reg.fit(self._X, self._y, self._sample_weight)
+        self.reg_.fit(self._X, self._y, self._sample_weight)
 
-        self.activation_energy_ = -self.constant * self.reg.coef_[0]
+        self.activation_energy_ = -self.constant * self.reg_.coef_[0]
+        self.extrapolated_process_ = self.predict(np.array([[300.0]]))[0]
 
         return self
 
@@ -148,10 +153,10 @@ class ArrheniusRegressor(BaseEstimator, RegressorMixin):
         X : array-like of shape (n_samples, 1)
             Temperature data.
         """
-        return np.exp(self.reg.predict(1 / X))
+        return np.exp(self.reg_.predict(1 / X))
 
     def to_dataframe(self, X, y, sample_weight=None):
-        """Convert the data with the predictions to a pandas.DataFrame.
+        """Convert the data with the predictions to a ``pandas.DataFrame``.
 
         Parameters
         ----------
@@ -167,7 +172,7 @@ class ArrheniusRegressor(BaseEstimator, RegressorMixin):
         Returns
         -------
         pandas.DataFrame
-            A pandas.DataFrame with the data.
+            A ``pandas.DataFrame`` with the data.
         """
         df = pd.DataFrame(
             {
@@ -237,6 +242,6 @@ class ArrheniusPlotter:
             yerr=self.areg._sample_weight,
             **data_kws,
         )
-        ax.plot(self.areg._X, self.areg.reg.predict(self.areg._X), **pred_kws)
+        ax.plot(self.areg._X, self.areg.reg_.predict(self.areg._X), **pred_kws)
 
         return ax
