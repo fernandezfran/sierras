@@ -35,7 +35,7 @@ You need Python 3.9+ to run sierras.
 
 
 | **Authors**
-| Francisco Fernandez (E-mail: fernandezfrancisco2195@gmail.com)
+| Francisco Fernandez (E-mail: ffernandev@gmail.com)
 
 
 Repository

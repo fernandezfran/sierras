@@ -59,4 +59,4 @@ and the [API](https://sierras.readthedocs.io/en/latest/api.html).
 
 ### Contact info
 
-<fernandezfrancisco2195@gmail.com>
+<ffernandev@gmail.com>
