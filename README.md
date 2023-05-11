@@ -47,7 +47,7 @@ areg.plot.arrhenius(Temperatures, target_process)  # plot the fitting
 ```
 
 
-You can also read the 
+For a more detailed explanation you can read the 
 [tutorial](https://sierras.readthedocs.io/en/latest/tutorial.html) 
 and the [API](https://sierras.readthedocs.io/en/latest/api.html).
 
