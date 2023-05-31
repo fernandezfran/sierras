@@ -177,8 +177,8 @@ class ArrheniusRegressor(BaseEstimator, RegressorMixin):
         df = pd.DataFrame(
             {
                 "temperatures": X.ravel(),
-                "reaction_rate": y,
-                "reaction_rate_pred": self.predict(X),
+                "process": y,
+                "process_pred": self.predict(X),
             }
         )
 

@@ -75,8 +75,8 @@ class TestArrheniusRegressor:
         df_ref = pd.DataFrame(
             {
                 "temperatures": dataset["X"].ravel(),
-                "reaction_rate": dataset["y"],
-                "reaction_rate_pred": pred,
+                "process": dataset["y"],
+                "process_pred": pred,
             }
         )
         if dataset["sample_weight"] is not None:
