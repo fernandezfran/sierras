@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # This file is part of sierras (https://github.com/fernandezfran/sierras/).
-# Copyright (c) 2021, Francisco Fernandez
+# Copyright (c) 2021-2023, Francisco Fernandez
 # License: MIT
 #   Full Text: https://github.com/fernandezfran/sierras/blob/master/LICENSE
 
