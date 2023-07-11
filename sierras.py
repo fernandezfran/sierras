@@ -91,13 +91,9 @@ class ArrheniusRegressor(BaseEstimator, RegressorMixin):
 
     Parameters
     ----------
-    constant : float
+    constant : float, default=8.617333262e-5
         Either the universal gas constant, :math:`R`, or the Boltzmann
-        constant, :math:`k_B`.
-
-    **kwargs
-        Keyword arguments that are passed and are documented in
-        ``sklearn.linear_model.LinearRegression``.
+        constant, :math:`k_B`, default value is the later in eV/K units.
 
     Attributes
     ----------
@@ -114,11 +110,10 @@ class ArrheniusRegressor(BaseEstimator, RegressorMixin):
         The linear regressor for :math:`\ln k` versus :math:`\frac{1}{T}`.
     """
 
-    def __init__(self, constant, **kwargs):
+    def __init__(self, constant=8.617333262e-5):
         self.constant = constant
-        self.reg_ = sklearn.linear_model.LinearRegression(**kwargs)
 
-    def fit(self, X, y, sample_weight=None):
+    def fit(self, X, y, sample_weight=None, **kwargs):
         """Fit the Arrhenius empirical equation.
 
         Parameters
@@ -131,7 +126,13 @@ class ArrheniusRegressor(BaseEstimator, RegressorMixin):
 
         sample_weight : array-like of shape (n_samples,), defualt=None
             Individual weight of each thermally-induced value.
+
+        **kwargs
+            Keyword arguments that are passed and are documented in
+            ``sklearn.linear_model.LinearRegression``.
         """
+        self.reg_ = sklearn.linear_model.LinearRegression(**kwargs)
+
         self._X = 1 / X
         self._y = np.log(y)
         self._sample_weight = (
