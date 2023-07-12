@@ -68,8 +68,7 @@ from sklearn.base import BaseEstimator, RegressorMixin
 # CONSTANTS
 # =============================================================================
 
-__all__ = ["ArrheniusRegressor", "ArrheniusPlotter"]
-
+__all__ = ["ArrheniusRegressor"]
 
 NAME = "sierras"
 
@@ -188,26 +187,8 @@ class ArrheniusRegressor(BaseEstimator, RegressorMixin):
 
         return df
 
-    @property
-    def plot(self):
-        """Arrhenius plot accessor."""
-        return ArrheniusPlotter(self)
-
-
-class ArrheniusPlotter:
-    """Arrhenius plot.
-
-    Parameters
-    ----------
-    areg : sierras.ArrheniusRegressor
-        An ArrheniusRegressor already fitted.
-    """
-
-    def __init__(self, areg):
-        self.areg = areg
-
-    def arrhenius(self, X, y, ax=None, data_kws=None, pred_kws=None):
-        """Arrhenius plot function.
+    def plot(self, ax=None, data_kws=None, pred_kws=None):
+        """Arrhenius plotter.
 
         Parameters
         ----------
@@ -237,12 +218,7 @@ class ArrheniusPlotter:
 
         pred_kws.setdefault("label", "fit")
 
-        ax.errorbar(
-            self.areg._X,
-            self.areg._y,
-            yerr=self.areg._sample_weight,
-            **data_kws,
-        )
-        ax.plot(self.areg._X, self.areg.reg_.predict(self.areg._X), **pred_kws)
+        ax.errorbar(self._X, self._y, yerr=self._sample_weight, **data_kws)
+        ax.plot(self._X, self.reg_.predict(self._X), **pred_kws)
 
         return ax

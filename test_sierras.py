@@ -129,7 +129,7 @@ class TestArrheniusRegressor:
 
         # test
         test_ax = fig_test.subplots()
-        areg.plot.arrhenius(X, y, ax=test_ax)
+        areg.plot(ax=test_ax)
 
         # expected
         ref_ax = fig_ref.subplots()
