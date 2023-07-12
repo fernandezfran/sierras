@@ -35,8 +35,7 @@ A simple example of use:
 ```python
 import sierras
 
-k_boltzmann = 8.617333262e-5  # eV / K
-areg = sierras.ArrheniusRegressor(k_boltzmann)
+areg = sierras.ArrheniusRegressor()
 
 areg.fit(Temperatures, target_process)
 

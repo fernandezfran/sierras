@@ -19,12 +19,6 @@ import pytest
 import sierras
 
 # ============================================================================
-# CONSTANTS
-# ============================================================================
-
-BOLTZMANN = 8.617333262e-5
-
-# ============================================================================
 # TESTS
 # ============================================================================
 
@@ -37,7 +31,7 @@ class TestArrheniusRegressor:
         """Test the empirical Arrhenius equation fitting."""
         dataset = request.getfixturevalue(dataset)
 
-        areg = sierras.ArrheniusRegressor(BOLTZMANN)
+        areg = sierras.ArrheniusRegressor()
         areg.fit(
             dataset["X"], dataset["y"], sample_weight=dataset["sample_weight"]
         )
@@ -53,7 +47,7 @@ class TestArrheniusRegressor:
         """Test the prediction of the thermally-induced process."""
         dataset = request.getfixturevalue(dataset)
 
-        areg = sierras.ArrheniusRegressor(BOLTZMANN)
+        areg = sierras.ArrheniusRegressor()
         areg.fit(
             dataset["X"], dataset["y"], sample_weight=dataset["sample_weight"]
         )
@@ -66,7 +60,7 @@ class TestArrheniusRegressor:
         """Test the dataframe."""
         dataset = request.getfixturevalue(dataset)
 
-        areg = sierras.ArrheniusRegressor(BOLTZMANN)
+        areg = sierras.ArrheniusRegressor()
         areg.fit(
             dataset["X"], dataset["y"], sample_weight=dataset["sample_weight"]
         )
@@ -92,7 +86,7 @@ class TestArrheniusRegressor:
         """Test the activation energy."""
         dataset = request.getfixturevalue(dataset)
 
-        areg = sierras.ArrheniusRegressor(BOLTZMANN)
+        areg = sierras.ArrheniusRegressor()
         areg.fit(
             dataset["X"], dataset["y"], sample_weight=dataset["sample_weight"]
         )
@@ -105,7 +99,7 @@ class TestArrheniusRegressor:
         """Test the extrapolation at room temperature of the process."""
         dataset = request.getfixturevalue(dataset)
 
-        areg = sierras.ArrheniusRegressor(BOLTZMANN)
+        areg = sierras.ArrheniusRegressor()
         areg.fit(
             dataset["X"], dataset["y"], sample_weight=dataset["sample_weight"]
         )
