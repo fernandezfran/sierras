@@ -33,16 +33,21 @@ python -m pip install -U sierras
 A simple example of use:
 
 ```python
-import sierras
+from sierras import ArrheniusRegressor()
 
-areg = sierras.ArrheniusRegressor()
+# default constant is Boltzmann in eV/K
+areg = ArrheniusRegressor()
 
+# temperatures and target_process arrays-like as usually used in scikit-learn 
 areg.fit(Temperatures, target_process)
 
-areg.activation_energy_  # in this case in eV
-areg.extrapolated_process_  # extrapolated process at room temperature
+# print the activation energy ([eV] in the default case) and the extrapolated 
+# process at room temperatures values
+print(areg.activation_energy_, areg.extrapolated_process_)
 
-areg.plot.arrhenius(Temperatures, target_process)  # plot the fitting
+# plot the fitting
+fig, ax = plt.subplots()
+areg.plot(ax=ax)
 ```
 
 
