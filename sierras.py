@@ -61,8 +61,8 @@ import numpy as np
 
 import pandas as pd
 
-import sklearn.linear_model
 from sklearn.base import BaseEstimator, RegressorMixin
+from sklearn.linear_model import LinearRegression
 
 # =============================================================================
 # CONSTANTS
@@ -130,7 +130,7 @@ class ArrheniusRegressor(BaseEstimator, RegressorMixin):
             Keyword arguments that are passed and are documented in
             ``sklearn.linear_model.LinearRegression``.
         """
-        self.reg_ = sklearn.linear_model.LinearRegression(**kwargs)
+        self.reg_ = LinearRegression(**kwargs)
 
         self._X = 1 / X
         self._y = np.log(y)
