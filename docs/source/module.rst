@@ -1,6 +1,6 @@
-===========
-sierras API
-===========
+==============
+sierras module
+==============
 
 .. toctree::
    :maxdepth: 4

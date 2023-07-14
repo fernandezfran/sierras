@@ -56,7 +56,7 @@ sierras is under `MIT License <https://github.com/fernandezfran/sierras/blob/mas
 
    install
    tutorial.ipynb
-   api
+   module
 
 
 Indices and tables
