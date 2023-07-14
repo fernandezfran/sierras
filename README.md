@@ -34,7 +34,7 @@ python -m pip install -U sierras
 A simple example of use:
 
 ```python
-from sierras import ArrheniusRegressor()
+from sierras import ArrheniusRegressor
 
 # default constant is Boltzmann in eV/K
 areg = ArrheniusRegressor()
