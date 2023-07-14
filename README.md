@@ -1,7 +1,7 @@
 # sierras
 
 [![Github Actions CI](https://github.com/fernandezfran/sierras/actions/workflows/sierras_ci.yml/badge.svg)](https://github.com/fernandezfran/sierras/actions/workflows/sierras_ci.yml)
-[![Coverage Status](https://coveralls.io/repos/github/fernandezfran/sierras/badge.svg?branch=main)](https://coveralls.io/github/fernandezfran/sierras?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/fernandezfran/sierras/badge.svg)](https://coveralls.io/github/fernandezfran/sierras)
 [![Documentation Status](https://readthedocs.org/projects/sierras/badge/?version=latest)](https://sierras.readthedocs.io/en/latest/?badge=latest)
 [![PyPI](https://img.shields.io/pypi/v/sierras)](https://pypi.org/project/sierras/)
 [![python version](https://img.shields.io/badge/python-3.8%2B-4584b6)](https://www.python.org/)
