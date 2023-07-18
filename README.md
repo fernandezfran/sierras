@@ -43,7 +43,7 @@ areg = ArrheniusRegressor()
 areg.fit(Temperatures, target_process)
 
 # print the activation energy ([eV] in the default case) and the extrapolated 
-# process at room temperatures values
+# process at room temperatures values (in the same units as target_process is)
 print(areg.activation_energy_, areg.extrapolated_process_)
 
 # plot the fitting
